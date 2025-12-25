@@ -15,7 +15,7 @@ def get_base64_image(image_path):
         return base64.b64encode(f.read()).decode()
 
 
-img_path = Path("./assets/profil_pic.JPG")
+img_path = Path("assets/profil_pic.JPG")
 profile_img = get_base64_image(img_path)
 
 # ===== CSS Styling =====
