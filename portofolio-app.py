@@ -1,5 +1,7 @@
 import streamlit as st
 from pathlib import Path
+from PIL import Image, ImageOps
+
 
 st.set_page_config(
     page_title="Portofolio - M. Herly Pratama",
@@ -164,7 +166,11 @@ with col_left:
 
 with col_right:
     if IMAGE_PATH.exists():
-        st.image(str(IMAGE_PATH), caption="foto profil", use_column_width=True)
+        img = Image.open(IMAGE_PATH)
+        img = ImageOps.exif_transpose(img)  # <<< FIX ROTASI OTOMATIS
+        img = ImageOps.fit(img, (500, 650))
+
+        st.image(img, caption="foto profil", use_column_width=True)
     else:
         st.warning("File gambar tidak ditemukan: profil_pic.jpg")
 
