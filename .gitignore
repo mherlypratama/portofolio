@@ -1,50 +1,50 @@
-# # OS
-# .DS_Store
-# Thumbs.db
+# OS
+.DS_Store
+Thumbs.db
 
-# # Python
-# __pycache__/
-# *.py[cod]
-# *$py.class
-# *.so
-# .Python
-# env/
-# venv/
-# ENV/
-# build/
-# develop-eggs/
-# dist/
-# downloads/
-# eggs/
-# .eggs/
-# lib/
-# lib64/
-# parts/
-# sdist/
-# var/
-# wheels/
-# *.egg-info/
-# .installed.cfg
-# *.egg
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# # IDE
-# .vscode/
-# .idea/
-# *.swp
-# *.swo
-# *~
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# # Streamlit
-# .streamlit/secrets.toml
-# .streamlit/cache/
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/cache/
 
-# # Testing
-# .pytest_cache/
-# .coverage
+# Testing
+.pytest_cache/
+.coverage
 
-# # Jupyter
-# .ipynb_checkpoints
+# Jupyter
+.ipynb_checkpoints
 
-# # Environment
-# .env
-# .env.local
+# Environment
+.env
+.env.local
