@@ -122,7 +122,7 @@ st.markdown(
         border-radius: 18px;
         display: block;
         margin-left: auto;
-        transform: rotate(90deg);
+        
     }
 
     </style>
@@ -177,6 +177,7 @@ with col_left:
 
 with col_right:
     if IMAGE_PATH.exists():
+        img = img.rotate(90, expand=True)
         st.image(str(IMAGE_PATH), caption="foto profil", use_column_width=True)
     else:
         st.warning("File gambar tidak ditemukan")
