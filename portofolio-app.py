@@ -16,7 +16,7 @@ st.set_page_config(
 
 
 BASE_DIR = Path(__file__).resolve().parent
-IMAGE_PATH = BASE_DIR / "assets" / "profil_pic.JPG"
+IMAGE_PATH = BASE_DIR / "assets" / "profil_pic.jpg"
 
 
 def get_base64_image(image_path):
