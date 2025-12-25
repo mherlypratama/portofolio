@@ -177,8 +177,9 @@ with col_left:
 
 with col_right:
     if IMAGE_PATH.exists():
+        img = Image.open(IMAGE_PATH)
         img = img.rotate(90, expand=True)
-        st.image(str(IMAGE_PATH), caption="foto profil", use_column_width=True)
+        st.image(img, caption="foto profil", use_column_width=True)
     else:
         st.warning("File gambar tidak ditemukan")
 
