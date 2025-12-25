@@ -173,7 +173,7 @@ with col_right:
         # img = img.rotate(-90, expand=True)  # kalau kebalik
         # img = img.rotate(180, expand=True)
 
-        img = ImageOps.fit(img, (500, 650))
+        img = ImageOps.fit(img, (300, 450))
 
         st.image(img, caption="foto profil", use_column_width=True)
     else:
