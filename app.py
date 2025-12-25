@@ -1,15 +1,11 @@
 import streamlit as st
 
-# Set the title of the app
-st.title("Hello Streamlit World! 👋")
+st.set_page_config(
+    page_title="Portofolio Data Science Saya",
+    page_icon="✨",
+    layout="wide",  # Bisa 'centered' atau 'wide'
+    initial_sidebar_state="expanded",  # Bisa 'auto', 'expanded', 'collapsed'
+)
 
-# Add some plain text
-st.text("This is my first simple Streamlit application.")
-
-# Add a markdown section
-st.markdown("You can use **Markdown** to format text.")
-
-# Add an interactive button
-if st.button("Send balloons!"):
-    st.balloons()
-    st.success("Balloons sent!")
+st.title("Selamat Datang di Portofolio Saya!")
+# Konten aplikasi lainnya
