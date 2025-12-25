@@ -1,5 +1,8 @@
 # Example requirements.txt file
 streamlit
+pathlib
+base64
+
 # pandas>=2.0
 # numpy<=1.25.1
 # scikit-learn

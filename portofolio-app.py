@@ -6,6 +6,7 @@ st.set_page_config(
     page_title="Portofolio - M. Herly Pratama",
     layout="wide",
 )
+# update library
 
 
 # ===== Helper untuk load image ke base64 =====
