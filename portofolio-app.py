@@ -122,6 +122,7 @@ st.markdown(
         border-radius: 18px;
         display: block;
         margin-left: auto;
+        transform: rotate(90deg);
     }
 
     </style>
