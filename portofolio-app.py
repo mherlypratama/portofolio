@@ -10,15 +10,23 @@ st.set_page_config(
 
 
 # ===== Helper untuk load image ke base64 =====
+# def get_base64_image(image_path):
+#     with open(image_path, "rb") as f:
+#         return base64.b64encode(f.read()).decode()
+
+
+BASE_DIR = Path(__file__).resolve().parent
+IMAGE_PATH = BASE_DIR / "assets" / "profil_pic.JPG"
+
+
 def get_base64_image(image_path):
+    if not image_path.exists():
+        raise FileNotFoundError(f"Image not found: {image_path}")
     with open(image_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
 
-BASE_DIR = Path(__file__).resolve().parent
-img_path = BASE_DIR / "assets" / "profil_pic.JPG"
-
-profile_img = get_base64_image(img_path)
+profile_img = get_base64_image(IMAGE_PATH)
 
 # ===== CSS Styling =====
 st.markdown(
