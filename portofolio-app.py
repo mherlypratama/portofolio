@@ -174,12 +174,6 @@ with col_right:
         # img = img.rotate(180, expand=True)
 
         img = ImageOps.fit(img, (500, 650))
-        # """
-        # .profile-img img {
-        #     transform: rotate(90deg);
-        #     }
-
-        # """
 
         st.image(img, caption="foto profil", use_column_width=True)
     else:
