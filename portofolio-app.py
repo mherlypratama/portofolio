@@ -10,4 +10,7 @@ st.set_page_config(
 st.subheader("Hi!")
 st.header("I'm M. Herly Pratama")
 st.subheader("a Data Scientist and Data Analyst")
+st.sidebar.header("Filter & Navigasi")
+st.sidebar.slider("Pilih nilai:", 0, 100, 50)
+
 # Konten aplikasi lainnya
