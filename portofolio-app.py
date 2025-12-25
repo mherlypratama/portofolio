@@ -1,34 +1,20 @@
 import streamlit as st
 from pathlib import Path
-import base64
 
 st.set_page_config(
     page_title="Portofolio - M. Herly Pratama",
     layout="wide",
 )
-# update library
 
-
-# ===== Helper untuk load image ke base64 =====
-# def get_base64_image(image_path):
-#     with open(image_path, "rb") as f:
-#         return base64.b64encode(f.read()).decode()
-
-
+# ===============================
+# PATH GAMBAR
+# ===============================
 BASE_DIR = Path(__file__).resolve().parent
-IMAGE_PATH = BASE_DIR / "assets" / "profil_pic.jpg"
+IMAGE_PATH = BASE_DIR / "profil_pic.jpg"
 
-
-def get_base64_image(image_path):
-    if not image_path.exists():
-        raise FileNotFoundError(f"Image not found: {image_path}")
-    with open(image_path, "rb") as f:
-        return base64.b64encode(f.read()).decode()
-
-
-profile_img = get_base64_image(IMAGE_PATH)
-
-# ===== CSS Styling =====
+# ===============================
+# CSS
+# ===============================
 st.markdown(
     """
     <style>
@@ -111,7 +97,7 @@ st.markdown(
         font-weight: 600;
     }
 
-    .profile-img {
+    .profile-img img {
         max-width: 100%;
         border-radius: 18px;
     }
@@ -131,9 +117,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ===== HTML Layout =====
+# ===============================
+# LAYOUT UTAMA
+# ===============================
 st.markdown(
-    f"""
+    """
     <div class="main-container">
         <div class="navbar">
             <div class="logo">Portofolio</div>
@@ -145,31 +133,39 @@ st.markdown(
                 <a href="#">Blog</a>
             </div>
         </div>
-
-        <div class="hero">
-            <div>
-                <h1>
-                    Hello 👋 <br/>
-                    I'm <b>M. Herly Pratama</b><br/>
-                    a <span class="blue">Data Scientist & Data Analyst</span>.
-                </h1>
-
-                <p>
-                    Hi, I'm Michele a Freelence web designer from San-Fransisco.
-                    I Help brands turn their ideas into high quality products
-                </p>
-
-                <div class="buttons">
-                    <a href="#" class="btn-primary">Book a Call</a>
-                    <a href="#" class="btn-secondary">Download CV</a>
-                </div>
-            </div>
-
-            <div>
-                <img src="data:image/jpeg;base64,{profile_img}" class="profile-img"/>
-            </div>
-        </div>
-    </div>
     """,
     unsafe_allow_html=True,
 )
+
+# HERO SECTION
+col_left, col_right = st.columns([1.2, 1])
+
+with col_left:
+    st.markdown(
+        """
+        <h1>
+            Hello 👋 <br/>
+            I'm <b>M. Herly Pratama</b><br/>
+            a <span class="blue">Data Scientist & Data Analyst</span>.
+        </h1>
+
+        <p>
+            Hi, I'm Michele a Freelence web designer from San-Fransisco.
+            I Help brands turn their ideas into high quality products
+        </p>
+
+        <div class="buttons">
+            <a href="#" class="btn-primary">Book a Call</a>
+            <a href="#" class="btn-secondary">Download CV</a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with col_right:
+    if IMAGE_PATH.exists():
+        st.image(str(IMAGE_PATH), caption="foto profil", use_column_width=True)
+    else:
+        st.warning("File gambar tidak ditemukan: profil_pic.jpg")
+
+st.markdown("</div>", unsafe_allow_html=True)
