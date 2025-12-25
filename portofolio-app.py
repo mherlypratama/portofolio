@@ -1,11 +1,164 @@
 import streamlit as st
+from pathlib import Path
+import base64
 
 st.set_page_config(
-    page_title="Portofolio Data Science Saya",
-    page_icon="✨",
-    layout="wide",  # Bisa 'centered' atau 'wide'
-    initial_sidebar_state="expanded",  # Bisa 'auto', 'expanded', 'collapsed'
+    page_title="Portofolio - M. Herly Pratama",
+    layout="wide",
 )
 
-st.title("Selamat Datang di Portofolio Saya!")
-# Konten aplikasi lainnya
+
+# ===== Helper untuk load image ke base64 =====
+def get_base64_image(image_path):
+    with open(image_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+
+img_path = Path("assets/profil_pic.JPG")
+profile_img = get_base64_image(img_path)
+
+# ===== CSS Styling =====
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #eef2f5;
+    }
+
+    .main-container {
+        background: #f9fbfd;
+        border-radius: 20px;
+        padding: 60px 80px;
+        margin-top: 20px;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 60px;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: 700;
+        color: #111;
+    }
+
+    .menu a {
+        margin: 0 15px;
+        text-decoration: none;
+        color: #555;
+        font-weight: 500;
+    }
+
+    .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        color: #111;
+    }
+
+    .hero span.blue {
+        color: #1f77ff;
+    }
+
+    .hero p {
+        font-size: 16px;
+        color: #666;
+        max-width: 520px;
+        margin-bottom: 30px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn-primary {
+        background: #1f77ff;
+        color: white;
+        padding: 12px 22px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .btn-secondary {
+        border: 1px solid #ddd;
+        color: #333;
+        padding: 12px 22px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .profile-img {
+        max-width: 100%;
+        border-radius: 18px;
+    }
+
+    @media (max-width: 900px) {
+        .hero {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .buttons {
+            justify-content: center;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# ===== HTML Layout =====
+st.markdown(
+    f"""
+    <div class="main-container">
+        <div class="navbar">
+            <div class="logo">Portofolio</div>
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Projects</a>
+                <a href="#">Blog</a>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div>
+                <h1>
+                    Hello 👋 <br/>
+                    I'm <b>M. Herly Pratama</b><br/>
+                    a <span class="blue">Data Scientist & Data Analyst</span>.
+                </h1>
+
+                <p>
+                    Hi, I'm Michele a Freelence web designer from San-Fransisco.
+                    I Help brands turn their ideas into high quality products
+                </p>
+
+                <div class="buttons">
+                    <a href="#" class="btn-primary">Book a Call</a>
+                    <a href="#" class="btn-secondary">Download CV</a>
+                </div>
+            </div>
+
+            <div>
+                <img src="data:image/jpeg;base64,{profile_img}" class="profile-img"/>
+            </div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
