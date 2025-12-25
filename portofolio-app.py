@@ -116,13 +116,12 @@ st.markdown(
     }
 
     .profile-img img {
-        max-height: 420px;      /* batasi tinggi */
+        max-height: 420px;
         width: auto;
         object-fit: contain;
         border-radius: 18px;
         display: block;
         margin-left: auto;
-        
     }
 
     </style>
@@ -178,8 +177,13 @@ with col_left:
 with col_right:
     if IMAGE_PATH.exists():
         img = Image.open(IMAGE_PATH)
+
+        # ROTASI SAJA (tanpa resize)
         img = img.rotate(90, expand=True)
-        st.image(img, caption="foto profil", use_column_width=True)
+
+        st.markdown('<div class="profile-img">', unsafe_allow_html=True)
+        st.image(img)
+        st.markdown("</div>", unsafe_allow_html=True)
     else:
         st.warning("File gambar tidak ditemukan")
 
