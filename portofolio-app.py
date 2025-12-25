@@ -114,6 +114,16 @@ st.markdown(
             justify-content: center;
         }
     }
+
+    .profile-img img {
+        max-height: 420px;      /* batasi tinggi */
+        width: auto;
+        object-fit: contain;
+        border-radius: 18px;
+        display: block;
+        margin-left: auto;
+    }
+
     </style>
     """,
     unsafe_allow_html=True,
@@ -166,17 +176,9 @@ with col_left:
 
 with col_right:
     if IMAGE_PATH.exists():
-        img = Image.open(IMAGE_PATH)
-
-        # ROTASI MANUAL (ubah angka jika perlu)
-        img = img.rotate(90, expand=True)  # coba 90
-        # img = img.rotate(-90, expand=True)  # kalau kebalik
-        # img = img.rotate(180, expand=True)
-
-        img = ImageOps.fit(img, (500, 650))
-
-        st.image(img, caption="foto profil", use_column_width=True)
+        st.image(str(IMAGE_PATH), caption="foto profil", use_column_width=True)
     else:
-        st.warning("File gambar tidak ditemukan: profil_pic.jpg")
+        st.warning("File gambar tidak ditemukan")
+
 
 st.markdown("</div>", unsafe_allow_html=True)
