@@ -19,13 +19,13 @@ def halaman_projects():
         {
             "title": "Sales Forecasting",
             "description": "Time series forecasting to predict future product sales.",
-            "image": "churn analysis.png",
+            "image": "project2.png",
             "page": "project2",
         },
         {
-            "title": "Customer Segmentation",
-            "description": "Clustering-based segmentation for targeted marketing.",
-            "image": "churn analysis.png",
+            "title": "People Analytics",
+            "description": "Clustering-based segmentation for Employee.",
+            "image": "project3.png",
             "page": "project3",
         },
     ]
