@@ -30,7 +30,18 @@ with tab2:
             st.markdown(
                 "AI Churn Analysis is a predictive analytics technique that uses machine learning algorithms to identify customers who are likely to stop doing business with a company, also known as customer churn. By analyzing historical data and behavior patterns, AI models can detect early warning signs of churn, such as changes in usage, engagement, or payment behavior. This enables businesses to proactively intervene with targeted retention strategies, such as personalized offers or support, to reduce churn rates and improve customer loyalty."
             )
-            
+        with col2:
+            st.image("churn analysis.png")
+            st.subheader("AI Churn Analysis")
+            st.markdown(
+                "AI Churn Analysis is a predictive analytics technique that uses machine learning algorithms to identify customers who are likely to stop doing business with a company, also known as customer churn. By analyzing historical data and behavior patterns, AI models can detect early warning signs of churn, such as changes in usage, engagement, or payment behavior. This enables businesses to proactively intervene with targeted retention strategies, such as personalized offers or support, to reduce churn rates and improve customer loyalty."
+            )
+        with col3:
+            st.image("churn analysis.png")
+            st.subheader("AI Churn Analysis")
+            st.markdown(
+                "AI Churn Analysis is a predictive analytics technique that uses machine learning algorithms to identify customers who are likely to stop doing business with a company, also known as customer churn. By analyzing historical data and behavior patterns, AI models can detect early warning signs of churn, such as changes in usage, engagement, or payment behavior. This enables businesses to proactively intervene with targeted retention strategies, such as personalized offers or support, to reduce churn rates and improve customer loyalty."
+            )
 
 
 with tab3:
