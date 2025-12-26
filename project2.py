@@ -78,7 +78,8 @@ for time series modeling.
         st.error("Column **'Order Date'** not found in dataset.")
         return
 
-    df_clean["Order Date"] = pd.to_datetime(df_clean["Order Date"])
+    df_clean["Order Date"] = pd.to_datetime(df_clean["Order Date"], errors="coerce")
+
     df_clean = df_clean.sort_values("Order Date")
     df_clean = df_clean.set_index("Order Date")
 
