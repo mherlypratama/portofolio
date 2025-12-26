@@ -9,6 +9,6 @@ if "page" not in st.session_state:
 
 if st.session_state.page == "home":
     halaman_home()
-
+#
 elif st.session_state.page == "projects":
     halaman_projects()
