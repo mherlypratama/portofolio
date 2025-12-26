@@ -2,6 +2,8 @@ import streamlit as st
 from home import halaman_home
 from projects import halaman_projects
 from project1 import halaman_project1
+from project2 import halaman_project2
+from project3 import halaman_project3
 
 st.set_page_config(layout="wide")
 
