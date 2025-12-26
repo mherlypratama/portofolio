@@ -1,6 +1,7 @@
 import streamlit as st
 from home import halaman_home
 from projects import halaman_projects
+from project1 import halaman_project1
 
 st.set_page_config(layout="wide")
 
@@ -12,3 +13,5 @@ if st.session_state.page == "home":
 #
 elif st.session_state.page == "projects":
     halaman_projects()
+elif st.session_state.page == "project1":
+    halaman_project1()

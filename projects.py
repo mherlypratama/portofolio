@@ -1,32 +1,60 @@
 import streamlit as st
+from pathlib import Path
 from router import pindah_halaman
 
 
 def halaman_projects():
-    st.header("My Project")
-    with st.container():
-        st.markdown("---")
-        col1, col2, col3 = st.columns(3)
-        deskripsi = "AI Churn Analysis is a predictive analytics technique that uses machine learning algorithms to identify customers who are likely to stop doing business with a company, also known as customer churn. By analyzing historical data and behavior patterns, AI models can detect early warning signs of churn, such as changes in usage, engagement, or payment behavior. This enables businesses to proactively intervene with targeted retention strategies, such as personalized offers or support, to reduce churn rates and improve customer loyalty."
-        with col1:
-            st.image("./assets/churn analysis.png")
-            st.subheader("AI Churn Analysis")
-            with st.expander("Show More..."):
-                st.write(
-                    "AI Churn Analysis is a predictive analytics technique that uses machine learning algorithms to identify customers who are likely to stop doing business with a company, also known as customer churn. By analyzing historical data and behavior patterns, AI models can detect early warning signs of churn, such as changes in usage, engagement, or payment behavior. This enables businesses to proactively intervene with targeted retention strategies, such as personalized offers or support, to reduce churn rates and improve customer loyalty."
-                )
-        with col2:
-            st.image("./assets/churn analysis.png")
-            st.subheader("AI Churn Analysis")
-            st.markdown(
-                "AI Churn Analysis is a predictive analytics technique that uses machine learning algorithms to identify customers who are likely to stop doing business with a company, also known as customer churn. By analyzing historical data and behavior patterns, AI models can detect early warning signs of churn, such as changes in usage, engagement, or payment behavior. This enables businesses to proactively intervene with targeted retention strategies, such as personalized offers or support, to reduce churn rates and improve customer loyalty."
-            )
-        with col3:
-            st.image("./assets/churn analysis.png")
-            st.subheader("AI Churn Analysis")
-            st.markdown(
-                "AI Churn Analysis is a predictive analytics technique that uses machine learning algorithms to identify customers who are likely to stop doing business with a company, also known as customer churn. By analyzing historical data and behavior patterns, AI models can detect early warning signs of churn, such as changes in usage, engagement, or payment behavior. This enables businesses to proactively intervene with targeted retention strategies, such as personalized offers or support, to reduce churn rates and improve customer loyalty."
-            )
+    # ================= PATH =================
+    BASE_DIR = Path(__file__).resolve().parent
+    ASSETS_DIR = BASE_DIR / "assets"
 
-    if st.button("Kembali"):
+    # ================= DATA PROJECT =================
+    projects = [
+        {
+            "title": "AI Churn Analysis",
+            "description": "Predict customer churn using machine learning and behavioral analytics.",
+            "image": "churn analysis.png",
+            "page": "project1",
+        },
+        {
+            "title": "Sales Forecasting",
+            "description": "Time series forecasting to predict future product sales.",
+            "image": "churn analysis.png",
+            "page": "project2",
+        },
+        {
+            "title": "Customer Segmentation",
+            "description": "Clustering-based segmentation for targeted marketing.",
+            "image": "churn analysis.png",
+            "page": "project3",
+        },
+    ]
+
+    # ================= PAGE HEADER =================
+    st.markdown("## 🚀 My Projects")
+    st.markdown("A collection of data science and machine learning projects.")
+    st.markdown("---")
+
+    # ================= GRID RENDER =================
+    cols = st.columns(3)
+
+    for i, project in enumerate(projects):
+        with cols[i % 3]:
+            img_path = ASSETS_DIR / project["image"]
+
+            if img_path.exists():
+                st.image(img_path, use_container_width=True)
+            else:
+                st.warning("Image not found")
+
+            st.subheader(project["title"])
+            st.caption(project["description"])
+
+            if st.button("See More...", key=f"project_btn_{i}"):
+                pindah_halaman(project["page"])
+
+    st.markdown("---")
+
+    # ================= BACK BUTTON =================
+    if st.button("⬅ Kembali", key="back_home"):
         pindah_halaman("home")
