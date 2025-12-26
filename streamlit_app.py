@@ -15,3 +15,7 @@ elif st.session_state.page == "projects":
     halaman_projects()
 elif st.session_state.page == "project1":
     halaman_project1()
+elif st.session_state.page == "project2":
+    halaman_project2()
+elif st.session_state.page == "project3":
+    halaman_project3()
