@@ -72,7 +72,7 @@ for time series modeling.
 
     # ================= TIME INDEX PROCESSING =================
     st.markdown("---")
-    st.subheader("🕒 Time Index Preparation")
+    st.subheader("🕒 Time Index Preparation")   
 
     if "Order Date" not in df_clean.columns:
         st.error("Column **'Order Date'** not found in dataset.")
