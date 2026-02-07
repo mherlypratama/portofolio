@@ -86,9 +86,16 @@ Proyek ini menggunakan teknik Time Series Forecasting untuk memodelkan pola data
     st.header("2. Multi-Level Granularity Analysis")
     col3, col4 = st.columns([1.5, 1])
     list_gambar = ["c1.jpeg", "c2.jpeg", "c3.jpeg"]
+
     for i in list_gambar:
         img_path = ASSETS_DIR / i
-        st.image(img_path, use_container_width=True)
+
+        # 2. Cek apakah file benar-benar ada sebelum dibuka
+        if img_path.exists():
+            # Gunakan str(img_path) agar kompatibel dengan st.image
+            st.image(str(img_path), use_container_width=True)
+        else:
+            st.error(f"Gagal menemukan gambar: {img_path}")
 
     with col3:
         st.subheader("📝 Penjelasan")
