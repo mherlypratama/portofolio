@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
-from PIL import Image, ImageOps
+from PIL import Image
 
 
 def local_css(file_name):
@@ -14,13 +14,15 @@ def local_css(file_name):
 
 def halaman_project2():
     # ================= PATH =================
+    # Menggunakan .parent dengan hati-hati tergantung struktur folder Anda
     BASE_DIR = Path(__file__).resolve().parent
+    # Pastikan folder adalah: assets/project2/ (case-sensitive di Linux/Streamlit Cloud)
     ASSETS_DIR = BASE_DIR / "assets" / "project2"
     CSS_PATH = BASE_DIR / "style.css"
 
     # ===== LOAD CSS =====
     if CSS_PATH.exists():
-        local_css(CSS_PATH)
+        local_css(str(CSS_PATH))
 
     st.header("Sales Time Series Forecasting: Predictive Analytics for Business Growth")
     st.markdown(
@@ -30,37 +32,45 @@ def halaman_project2():
 
     # ================= DESCRIPTION =================
     st.markdown("## **Latar Belakang**")
-    st.markdown(
+    st.write(
         """
-Ketidakpastian fluktuasi pasar sering kali menyebabkan masalah manajemen stok dan inefisiensi anggaran. 
-Proyek ini menggunakan teknik Time Series Forecasting untuk memodelkan pola data historis, menangkap tren jangka panjang, serta musiman (seasonality) guna memprediksi volume penjualan di masa mendatang secara akurat.
-"""
+    Ketidakpastian fluktuasi pasar sering kali menyebabkan masalah manajemen stok dan inefisiensi anggaran. 
+    Proyek ini menggunakan teknik Time Series Forecasting untuk memodelkan pola data historis, menangkap tren jangka panjang, 
+    serta musiman (seasonality) guna memprediksi volume penjualan di masa mendatang secara akurat.
+    """
     )
 
     # ================= Manfaat =================
     st.markdown("## **Manfaat (Value/Impact)**")
     points = [
-        "Optimasi Operasional: Memberikan panduan bagi tim supply chain dalam mengatur stok barang (mencegah overstock atau stockout).",
-        "Perencanaan Strategis: Membantu manajemen dalam menyusun target penjualan bulanan dan tahunan berbasis data.",
-        "Agregasi Multi-Level: Memungkinkan analisis dari skala harian (operasional) hingga bulanan (strategis) untuk pengambilan keputusan yang lebih relevan.",
+        "**Optimasi Operasional:** Memberikan panduan bagi tim supply chain dalam mengatur stok barang.",
+        "**Perencanaan Strategis:** Membantu manajemen dalam menyusun target penjualan berbasis data.",
+        "**Agregasi Multi-Level:** Analisis dari skala harian hingga bulanan untuk keputusan yang relevan.",
     ]
     for p in points:
-        st.write(f"* {p}")
+        st.markdown(f"* {p}")
+
+    st.markdown("---")
 
     # --- SECTION 1: SEASONAL DECOMPOSITION ---
     st.header("1. Seasonal Decomposition Analysis")
-    col1, col2 = st.columns([1.5, 1])
-    img_path1 = ASSETS_DIR / "c4.jpeg"
-    st.image(img_path1, use_container_width=True)
 
+    img_path1 = ASSETS_DIR / "c4.jpeg"
+
+    # PERBAIKAN: Cek keberadaan file dan konversi ke string
+    if img_path1.exists():
+        st.image(str(img_path1), use_container_width=True)
+    else:
+        st.error(f"File tidak ditemukan: {img_path1.name} di folder assets/project2/")
+
+    col1, col2 = st.columns([1.5, 1])
     with col1:
         st.subheader("📝 Penjelasan")
         st.write(
             """
-        Visualisasi ini memisahkan data penjualan mentah menjadi empat komponen utama: **Observed** (data asli), 
-        **Trend** (arah jangka panjang), **Seasonal** (pola berulang), dan **Residual** (noise/gangguan). 
-        Proses dekomposisi ini sangat krusial dalam Data Science untuk memahami apakah fluktuasi penjualan 
-        disebabkan oleh pertumbuhan bisnis yang organik atau sekadar pola musiman yang terjadi secara periodik.
+        Visualisasi ini memisahkan data penjualan mentah menjadi empat komponen utama: **Observed**, 
+        **Trend**, **Seasonal**, dan **Residual**. Memahami apakah fluktuasi disebabkan oleh pertumbuhan 
+        organik atau sekadar pola musiman.
         """
         )
 
@@ -68,40 +78,36 @@ Proyek ini menggunakan teknik Time Series Forecasting untuk memodelkan pola data
         st.subheader("💡 Key Insights")
         st.markdown(
             """
-        * **Pola Tren:** Mengidentifikasi apakah bisnis sedang dalam fase ekspansi atau kontraksi secara jangka panjang.
-        * **Kekuatan Musiman:** Menunjukkan seberapa konsisten pola kenaikan penjualan di periode tertentu.
-        * **Deteksi Anomali:** Komponen *Residual* membantu mendeteksi kejadian luar biasa (seperti *outliers*) yang tidak mengikuti pola tren maupun musiman.
+        * **Pola Tren:** Arah bisnis jangka panjang.
+        * **Kekuatan Musiman:** Konsistensi kenaikan di periode tertentu.
+        * **Deteksi Anomali:** *Residual* membantu melihat pencilan (*outliers*).
         """
         )
 
-    # Simulasi penempatan gambar di bawah kontainer teks
-    st.info(
-        "🖼️ *Tempatkan visualisasi 'Seasonal Decomposition' (4 panel: Observed, Trend, Seasonal, Residual) di sini.*"
-    )
-    #
-
     st.markdown("---")
 
-    # --- SECTION 2: MULTI-LEVEL TIME SERIES (DAILY, WEEKLY, MONTHLY) ---
+    # --- SECTION 2: MULTI-LEVEL TIME SERIES ---
     st.header("2. Multi-Level Granularity Analysis")
+
+    # List gambar untuk looping agar kode lebih bersih
+    list_gambar = ["c1.jpeg", "c2.jpeg", "c3.jpeg"]
+
+    # Container untuk gambar agar rapi
+    cols_img = st.columns(len(list_gambar))
+    for idx, img_name in enumerate(list_gambar):
+        p = ASSETS_DIR / img_name
+        if p.exists():
+            cols_img[idx].image(str(p), use_container_width=True, caption=img_name)
+        else:
+            cols_img[idx].warning(f"{img_name} missing")
+
     col3, col4 = st.columns([1.5, 1])
-
-    img_path2 = ASSETS_DIR / "c1.jpeg"
-    img_path3 = ASSETS_DIR / "c2.jpeg"
-    img_path4 = ASSETS_DIR / "c3.jpeg"
-
-    st.image(img_path2, use_container_width=True)
-    st.image(img_path3, use_container_width=True)
-    st.image(img_path4, use_container_width=True)
-
     with col3:
         st.subheader("📝 Penjelasan")
         st.write(
             """
-        Analisis ini membandingkan fluktuasi penjualan pada tiga tingkat agregasi: **Harian, Mingguan, dan Bulanan**. 
-        Data harian seringkali sangat bergejolak (*noisy*), sementara agregasi mingguan dan bulanan membantu 
-        menghaluskan variansi tersebut. Perbedaan perspektif ini memungkinkan kita untuk beralih dari pengamatan 
-        operasional yang mendetail ke pengamatan strategis yang lebih luas.
+        Perbandingan agregasi: **Harian, Mingguan, dan Bulanan**. 
+        Membantu menghaluskan *noise* data harian untuk melihat pandangan strategis yang lebih luas.
         """
         )
 
@@ -109,22 +115,14 @@ Proyek ini menggunakan teknik Time Series Forecasting untuk memodelkan pola data
         st.subheader("💡 Key Insights")
         st.markdown(
             """
-        * **Level Harian (Operational):** Efektif untuk mendeteksi *peak hours* dan pola perilaku belanja harian guna penyesuaian stok harian.
-        * **Level Mingguan (Tactical):** Mengurangi *noise* harian; sangat berguna untuk mengevaluasi efektivitas kampanye promosi jangka pendek.
-        * **Level Bulanan (Strategic):** Menghilangkan fluktuasi kecil untuk fokus pada performa bisnis makro, perencanaan anggaran, dan proyeksi tahunan.
+        * **Daily:** Deteksi *peak hours* operasional.
+        * **Weekly:** Evaluasi taktis promosi mingguan.
+        * **Monthly:** Fokus pada performa bisnis makro dan budget.
         """
         )
 
-    # Simulasi penempatan gambar di bawah kontainer teks
-    st.info(
-        "🖼️ *Tempatkan visualisasi perbandingan grafik garis (Daily vs Weekly vs Monthly) di sini.*"
-    )
-    #
-
     st.markdown("---")
-
     st.caption("Developed by Herly - Time Series Project Portfolio")
-    # ================= BACK BUTTON =================
-    st.markdown("---")
+
     if st.button("⬅ Back to Projects"):
         pindah_halaman("projects")
