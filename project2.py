@@ -180,17 +180,20 @@ def halaman_project2():
 
     st.markdown("---")
     # ================= SECTION: RANDOM FOREST INITIAL =================
-    st.header("Model: Random Forest (Initial Performance)")
-    
+
     col_rf_init_text, col_rf_init_insight = st.columns([1.5, 1])
-    
+
     with col_rf_init_text:
         st.subheader("📝 Penjelasan: Random Forest Regressor")
         # Sesuaikan nama file image jika ada (contoh: m3.png)
-        img_path_m3 = ASSETS_DIR / "m4.png" 
+        img_path_m3 = ASSETS_DIR / "m4.png"
         if img_path_m3.exists():
-            st.image(str(img_path_m3), use_container_width=True, caption="Initial Random Forest Fit")
-            
+            st.image(
+                str(img_path_m3),
+                use_container_width=True,
+                caption="Initial Random Forest Fit",
+            )
+
         st.write(
             """
             Random Forest adalah algoritma *ensemble learning* yang bekerja dengan menggabungkan hasil dari banyak 
