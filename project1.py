@@ -5,20 +5,20 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-# Fungsi untuk Load & Preprocessing (Hanya jalan 1x)
+# FIXED: Menambahkan caching agar load data sangat cepat
 @st.cache_data
 def get_cleaned_data(file_path):
     df = pd.read_csv(file_path)
     df_clean = df.copy()
 
-    # Preprocessing
+    # Preprocessing - FIXED: Menghilangkan FutureWarning Pandas 3.0
     num_cols = df_clean.select_dtypes(include="number").columns
     for col in num_cols:
-        df_clean[col].fillna(df_clean[col].median(), inplace=True)
+        df_clean[col] = df_clean[col].fillna(df_clean[col].median())
 
     cat_cols = df_clean.select_dtypes(include="object").columns
     for col in cat_cols:
-        df_clean[col].fillna(df_clean[col].mode()[0], inplace=True)
+        df_clean[col] = df_clean[col].fillna(df_clean[col].mode()[0])
 
     df_clean.drop_duplicates(inplace=True)
     return df, df_clean
@@ -29,14 +29,19 @@ def halaman_project1():
     st.markdown("---")
 
     # Ambil data dari cache
-    # Data mentah dan bersih hanya diproses sekali di awal!
-    df_raw, df_clean = get_cleaned_data("./data/churn.csv")
+    try:
+        df_raw, df_clean = get_cleaned_data("./data/churn.csv")
+    except FileNotFoundError:
+        st.error("File churn.csv tidak ditemukan di folder data!")
+        return
 
-    # ... (bagian narasi Markdown kamu tetap sama) ...
+    st.markdown(
+        "Project ini mendemonstrasikan analisis churn menggunakan machine learning."
+    )
 
     # ================= RAW DATA =================
-    with st.expander("📂 Lihat Dataset Mentah"):  # Gunakan expander agar tidak penuh
-        st.dataframe(df_raw)
+    with st.expander("📂 Lihat Dataset Mentah"):
+        st.dataframe(df_raw, width="stretch")
 
     # ================= EDA SECTION =================
     st.subheader("📊 Exploratory Data Analysis (EDA)")
@@ -44,32 +49,31 @@ def halaman_project1():
     numeric_cols = df_clean.select_dtypes(include="number").columns.tolist()
 
     if numeric_cols:
-        # Gunakan kolom untuk menghemat ruang dan rapi
-        c1, c2 = st.columns(2)
+        col_a, col_b = st.columns(2)
 
-        with c1:
-            selected_line = st.selectbox("Trend Column:", numeric_cols, key="line_col")
+        with col_a:
+            selected_line = st.selectbox(
+                "Pilih Kolom Trend:", numeric_cols, key="line_col"
+            )
             st.line_chart(df_clean[selected_line])
 
-        with c2:
+        with col_b:
             selected_hist = st.selectbox(
-                "Distribution Column:", numeric_cols, key="hist_col"
+                "Pilih Kolom Distribusi:", numeric_cols, key="hist_col"
             )
             fig, ax = plt.subplots()
-            ax.hist(
-                df_clean[selected_hist], bins=30, color="#3DB6B1"
-            )  # Pakai warna palette kamu
+            ax.hist(df_clean[selected_hist], bins=30, color="#2563eb")
             st.pyplot(fig)
 
-    # ---------- CORRELATION (Caching juga jika dataset sangat besar) ----------
+    # ================= HEATMAP =================
     st.markdown("### 🔗 Correlation Heatmap")
-
-    # Tips: Hitung korelasi hanya sekali
-    corr = df_clean[numeric_cols].corr()
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", ax=ax)
-    st.pyplot(fig)
+    if len(numeric_cols) >= 2:
+        corr = df_clean[numeric_cols].corr()
+        fig_corr, ax_corr = plt.subplots(figsize=(8, 6))
+        sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", ax=ax_corr)
+        st.pyplot(fig_corr)
 
     # ================= FOOTER =================
-    if st.button("⬅ Back to Projects"):
+    st.markdown("---")
+    if st.button("⬅ Back to Projects", key="back_proj"):
         pindah_halaman("projects")
