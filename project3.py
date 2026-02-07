@@ -8,7 +8,7 @@ from pathlib import Path
 def halaman_project3():
     # ================= PATH SETUP =================
     BASE_DIR = Path(__file__).resolve().parent
-    ASSETS_DIR = BASE_DIR / "assets" / "project3"
+    ASSETS_DIR = BASE_DIR / "assets"
 
     # ================= HEADER =================
     st.header("⚡ Electrical Fault Classification: Transmission Lines")
@@ -62,7 +62,7 @@ def halaman_project3():
     st.header("2. Model Evaluation & Mathematical Results")
 
     # Placeholder untuk gambar F1 Score Plot
-    img_f1 = ASSETS_DIR / "f1_score_plot.png"
+    img_f1 = ASSETS_DIR / "f1.png"
     if img_f1.exists():
         st.image(
             str(img_f1),
@@ -70,7 +70,7 @@ def halaman_project3():
             caption="F1-Score per Class Distribution",
         )
     else:
-        st.warning("⚠️ File 'f1_score_plot.png' belum ada di folder assets.")
+        st.warning("⚠️ File 'f1.png' belum ada di folder assets.")
 
     # TABEL DATA KUANTITATIF (HARDCODED DARI HASIL NOTEBOOK)
     st.subheader("📉 Detailed Performance Metrics (Class-wise)")
