@@ -179,12 +179,45 @@ def halaman_project2():
         )
 
     st.markdown("---")
+    # ================= SECTION: RANDOM FOREST INITIAL =================
+    st.header("Model: Random Forest (Initial Performance)")
+    
+    col_rf_init_text, col_rf_init_insight = st.columns([1.5, 1])
+    
+    with col_rf_init_text:
+        st.subheader("📝 Penjelasan: Random Forest Regressor")
+        # Sesuaikan nama file image jika ada (contoh: m3.png)
+        img_path_m3 = ASSETS_DIR / "m4.png" 
+        if img_path_m3.exists():
+            st.image(str(img_path_m3), use_container_width=True, caption="Initial Random Forest Fit")
+            
+        st.write(
+            """
+            Random Forest adalah algoritma *ensemble learning* yang bekerja dengan menggabungkan hasil dari banyak 
+            pohon keputusan (*decision trees*). Pada tahap awal ini, model dilatih untuk memetakan hubungan 
+            non-linear antara fitur waktu (hari, bulan, tahun) dan variabel target. Hasil evaluasi pada 
+            set ini menunjukkan kemampuan model dalam melakukan 'fitting' yang sangat rapat terhadap 
+            pola data historis yang diberikan.
+            """
+        )
+
+    with col_rf_init_insight:
+        st.subheader("💡 Key Insights")
+        st.markdown(
+            """
+            * **Akurasi Luar Biasa (High Precision):** Skor **MAPE 0,76%** mengindikasikan bahwa rata-rata kesalahan prediksi kurang dari 1%. Ini menunjukkan model mampu menangkap hampir seluruh varians dalam data.
+            * **Kesalahan Absolut Minimal:** Dengan **MAE (654,23)**, rata-rata selisih antara prediksi dan kenyataan hanya sekitar 654 unit, angka yang sangat kecil dibandingkan rata-rata penjualan harian (~94rb).
+            * **Stabilitas Error:** Nilai **RMSE (1.108,33)** yang tidak terpaut jauh dari MAE menunjukkan bahwa model ini tidak menghasilkan kesalahan ekstrem (*large outliers*) pada fase pengujian ini.
+            * **Analisis Teknis:** Performa yang sangat tinggi ini menjadi fondasi bagi proses *retraining* untuk memastikan model tetap memiliki generalisasi yang baik saat menghadapi data masa depan yang belum pernah dilihat sebelumnya.
+            """
+        )
+    st.markdown("---")
 
     # --- RANDOM FOREST ---
     col_rf_text, col_rf_insight = st.columns([1.5, 1])
     with col_rf_text:
-        st.subheader("📝 Penjelasan: Random Forest Regressor")
-        img_path_m4 = ASSETS_DIR / "m4.png"
+        st.subheader("📝 Penjelasan: Re-Train Random Forest Regressor")
+        img_path_m4 = ASSETS_DIR / "m5.png"
         if img_path_m4.exists():
             st.image(str(img_path_m4), use_container_width=True)
 
