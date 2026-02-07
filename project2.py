@@ -55,7 +55,7 @@ def halaman_project2():
     # --- SECTION 1: SEASONAL DECOMPOSITION ---
     st.header("1. Seasonal Decomposition Analysis")
 
-    img_path1 = ASSETS_DIR / "c4.jpeg"
+    img_path1 = ASSETS_DIR / "c4.png"
 
     # PERBAIKAN: Cek keberadaan file dan konversi ke string
     if img_path1.exists():
@@ -90,7 +90,7 @@ def halaman_project2():
     st.header("2. Multi-Level Granularity Analysis")
 
     # List gambar untuk looping agar kode lebih bersih
-    list_gambar = ["c1.jpeg", "c2.jpeg", "c3.jpeg"]
+    list_gambar = ["c1.jpeg", "c2.jpeg", "c3.png"]
 
     # Container untuk gambar agar rapi
     cols_img = st.columns(len(list_gambar))
