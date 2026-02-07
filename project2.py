@@ -50,12 +50,8 @@ Proyek ini menggunakan teknik Time Series Forecasting untuk memodelkan pola data
     # --- SECTION 1: SEASONAL DECOMPOSITION ---
     st.header("1. Seasonal Decomposition Analysis")
     col1, col2 = st.columns([1.5, 1])
-    img_path = ASSETS_DIR / "c1.jpeg"
-    if img_path.exists():
-        st.image(img_path, use_container_width=True)
-    else:
-        # Placeholder jika gambar tidak ada
-        st.info(f"🖼️ Project")
+    img_path1 = ASSETS_DIR / "c4.jpeg"
+    st.image(img_path1, use_container_width=True)
 
     with col1:
         st.subheader("📝 Penjelasan")
@@ -89,6 +85,10 @@ Proyek ini menggunakan teknik Time Series Forecasting untuk memodelkan pola data
     # --- SECTION 2: MULTI-LEVEL TIME SERIES (DAILY, WEEKLY, MONTHLY) ---
     st.header("2. Multi-Level Granularity Analysis")
     col3, col4 = st.columns([1.5, 1])
+    list_gambar = ["c1.jpeg", "c2.jpeg", "c3.jpeg"]
+    for i in list_gambar:
+        img_path = ASSETS_DIR / i
+        st.image(img_path, use_container_width=True)
 
     with col3:
         st.subheader("📝 Penjelasan")
