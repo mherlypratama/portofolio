@@ -66,7 +66,7 @@ def halaman_project3():
     if img_f1.exists():
         st.image(
             str(img_f1),
-            width=500,
+            use_container_width=True,
             caption="F1-Score per Class Distribution",
         )
     else:
