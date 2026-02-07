@@ -50,12 +50,12 @@ Proyek ini menggunakan teknik Time Series Forecasting untuk memodelkan pola data
     # --- SECTION 1: SEASONAL DECOMPOSITION ---
     st.header("1. Seasonal Decomposition Analysis")
     col1, col2 = st.columns([1.5, 1])
-    img_path = ASSETS_DIR / "c1"
+    img_path = ASSETS_DIR / "c1.jpeg"
     if img_path.exists():
         st.image(img_path, use_container_width=True)
     else:
         # Placeholder jika gambar tidak ada
-        st.info(f"🖼️ {project['title']}")
+        st.info(f"🖼️ Project")
 
     with col1:
         st.subheader("📝 Penjelasan")
