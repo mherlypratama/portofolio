@@ -67,6 +67,7 @@ def halaman_project3():
         st.image(
             str(img_f1),
             use_container_width=True,
+            width=500,
             caption="F1-Score per Class Distribution",
         )
     else:
