@@ -4,6 +4,7 @@ from projects import halaman_projects
 from project1 import halaman_project1
 from project2 import halaman_project2
 from project3 import halaman_project3
+from about import halaman_about
 
 st.set_page_config(layout="wide")
 
@@ -21,3 +22,6 @@ elif st.session_state.page == "project2":
     halaman_project2()
 elif st.session_state.page == "project3":
     halaman_project3()
+
+elif st.session_state.page == "about":
+    halaman_about()
