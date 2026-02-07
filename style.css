@@ -1,0 +1,49 @@
+/* Definisi Palette Warna */
+:root {
+    --pink-pastel: #F6B1CE;
+    --blue-linkedin: #1581BF;
+    --teal-custom: #3DB6B1;
+    --green-soft: #CCE5CF;
+    --white: #ffffff;
+}
+
+/* container utama */
+section.main > div:first-child {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Base style untuk st.button dan st.link_button */
+div[data-testid="column"] button, 
+div[data-testid="column"] .stLinkButton a {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tombol Biru (Primary) */
+.stButton > button, .stLinkButton > a {
+    background-color: var(--teal-custom) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Efek Hover */
+.stButton > button:hover, .stLinkButton > a:hover {
+    background-color: var(--green-soft) !important;
+    color: white !important;
+}
+
+/* Menyamakan tinggi container di kolom project (opsional) */
+[data-testid="column"] {
+    padding: 15px;
+    border: 1px solid var(--green-soft);
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+}

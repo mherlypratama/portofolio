@@ -1,46 +1,26 @@
 import streamlit as st
 from pathlib import Path
 from router import pindah_halaman
+from PIL import Image, ImageOps
+
+
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 def halaman_about():
     BASE_DIR = Path(__file__).resolve().parent
     IMAGE_PATH = BASE_DIR / "assets" / "profile_pic.png"
+    CSS_PATH = BASE_DIR / "style.css"
 
-    # ===== CSS =====
-    st.markdown(
-        """
-    <style>
-    /* container utama */
-    section.main > div:first-child {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-    }
+    # ===== LOAD CSS =====
+    if CSS_PATH.exists():
+        local_css(CSS_PATH)
 
-    /* tombol */
-    div[data-testid="column"] button {
-        padding: 10px 22px;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 15px;
-    }
-
-    .stButton > button:first-child {
-        background-color: #2563eb;
-        color: white;
-        border: none;
-    }
-
-    .stButton > button:last-child {
-        background-color: white;
-        color: #2563eb;
-        border: 1px solid #d1d5db;
-    }
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
+    # ================= BACK BUTTON =================
+    if st.button("⬅ Home", key="back_home"):
+        pindah_halaman("home")
 
     # ===== HERO CONTENT =====
     with st.container():
@@ -49,7 +29,9 @@ def halaman_about():
         with right:
             st.markdown("## Hi!")
             st.markdown("# I'm M. Herly Pratama")
-            st.markdown("a Data Scientist and Data Analyst")
+            st.markdown(
+                "As a data science professional with a robust background in analytics and scientific research, I specialize in transforming complex datasets into actionable insights. My expertise includes data analysis, machine learning, and data-driven decision-making, supported by certifications in Cloud Computing and Cyber Security. I am proficient in Python, R, SQL, and data visualization tools such as Tableau and Power BI. My career has spanned roles as an AI/ML Programmer and Software Developer, where I integrated predictive models and automated data processing pipelines into scalable applications."
+            )
 
         with left:
             if IMAGE_PATH.exists():
@@ -58,6 +40,7 @@ def halaman_about():
                 img.thumbnail((580, 700))
                 st.image(img)
 
-    # ================= BACK BUTTON =================
-    if st.button("⬅ Kembali", key="back_home"):
-        pindah_halaman("home")
+            # Link Button LinkedIn
+            st.link_button(
+                "Kunjungi LinkedIn Saya", "https://www.linkedin.com/in/mherlypratama/"
+            )

@@ -4,44 +4,18 @@ from pathlib import Path
 from PIL import Image, ImageOps
 
 
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
 def halaman_home():
     BASE_DIR = Path(__file__).resolve().parent
     IMAGE_PATH = BASE_DIR / "assets" / "profile_pic.png"
-
-    # ===== CSS =====
-    st.markdown(
-        """
-    <style>
-    /* container utama */
-    section.main > div:first-child {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-    }
-
-    /* tombol */
-    div[data-testid="column"] button {
-        padding: 10px 22px;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 15px;
-    }
-
-    .stButton > button:first-child {
-        background-color: #2563eb;
-        color: white;
-        border: none;
-    }
-
-    .stButton > button:last-child {
-        background-color: white;
-        color: #2563eb;
-        border: 1px solid #d1d5db;
-    }
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
+    CSS_PATH = BASE_DIR / "style.css"
+    # ===== LOAD CSS =====
+    if CSS_PATH.exists():
+        local_css(CSS_PATH)
 
     # ===== HERO CONTENT =====
     with st.container():

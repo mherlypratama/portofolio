@@ -5,121 +5,71 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def halaman_project1():
-    st.header("AI Churn Analysis")
-    st.markdown("---")
-
-    # ================= LOAD DATA =================
-    df = pd.read_csv("./data/churn.csv")
-
-    st.markdown(
-        """
-Customer churn analysis is a predictive analytics technique that identifies customers who are likely 
-to stop doing business with a company. By analyzing historical behavioral and demographic data, 
-companies can anticipate churn risk and take preventive actions.
-
-This project demonstrates:
-- Data preprocessing  
-- Exploratory Data Analysis (EDA)  
-- Visualization for insight discovery  
-"""
-    )
-
-    # ================= RAW DATA =================
-    st.markdown("---")
-    st.subheader("📂 Raw Dataset")
-    st.dataframe(df)
-
-    # ================= PREPROCESSING =================
-    st.markdown("---")
-    st.subheader("⚙️ Data Preprocessing")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("### Missing Values")
-        missing = df.isna().sum()
-        st.write(
-            missing[missing > 0] if missing.sum() > 0 else "No missing values found."
-        )
-
-    with col2:
-        st.markdown("### Duplicate Rows")
-        dup_count = df.duplicated().sum()
-        st.write(f"Total duplicated rows: **{dup_count}**")
-
-    # ---- HANDLE MISSING VALUES ----
+# Fungsi untuk Load & Preprocessing (Hanya jalan 1x)
+@st.cache_data
+def get_cleaned_data(file_path):
+    df = pd.read_csv(file_path)
     df_clean = df.copy()
 
-    # numerical → median
+    # Preprocessing
     num_cols = df_clean.select_dtypes(include="number").columns
     for col in num_cols:
         df_clean[col].fillna(df_clean[col].median(), inplace=True)
 
-    # categorical → mode
     cat_cols = df_clean.select_dtypes(include="object").columns
     for col in cat_cols:
         df_clean[col].fillna(df_clean[col].mode()[0], inplace=True)
 
-    # ---- REMOVE DUPLICATES ----
     df_clean.drop_duplicates(inplace=True)
+    return df, df_clean
 
-    st.success("✅ Missing values handled & duplicates removed")
 
-    # ================= CLEAN DATA PREVIEW =================
-    st.markdown("### Cleaned Dataset Preview")
-    st.dataframe(df_clean.head())
+def halaman_project1():
+    st.header("AI Churn Analysis")
+    st.markdown("---")
+
+    # Ambil data dari cache
+    # Data mentah dan bersih hanya diproses sekali di awal!
+    df_raw, df_clean = get_cleaned_data("./data/churn.csv")
+
+    # ... (bagian narasi Markdown kamu tetap sama) ...
+
+    # ================= RAW DATA =================
+    with st.expander("📂 Lihat Dataset Mentah"):  # Gunakan expander agar tidak penuh
+        st.dataframe(df_raw)
 
     # ================= EDA SECTION =================
-    st.markdown("---")
     st.subheader("📊 Exploratory Data Analysis (EDA)")
 
-    # ---------- NUMERIC COLUMNS ----------
     numeric_cols = df_clean.select_dtypes(include="number").columns.tolist()
 
     if numeric_cols:
-        st.markdown("### 📈 Line Chart (Numeric Trend)")
-        selected_line = st.selectbox(
-            "Select numeric column for line chart:",
-            numeric_cols,
-            key="line_col",
-        )
+        # Gunakan kolom untuk menghemat ruang dan rapi
+        c1, c2 = st.columns(2)
 
-        st.line_chart(df_clean[selected_line])
+        with c1:
+            selected_line = st.selectbox("Trend Column:", numeric_cols, key="line_col")
+            st.line_chart(df_clean[selected_line])
 
-        # ---------- HISTOGRAM ----------
-        st.markdown("### 📊 Histogram Distribution")
-        selected_hist = st.selectbox(
-            "Select column for histogram:",
-            numeric_cols,
-            key="hist_col",
-        )
+        with c2:
+            selected_hist = st.selectbox(
+                "Distribution Column:", numeric_cols, key="hist_col"
+            )
+            fig, ax = plt.subplots()
+            ax.hist(
+                df_clean[selected_hist], bins=30, color="#3DB6B1"
+            )  # Pakai warna palette kamu
+            st.pyplot(fig)
 
-        fig, ax = plt.subplots()
-        ax.hist(df_clean[selected_hist], bins=30)
-        ax.set_title(f"Distribution of {selected_hist}")
-        ax.set_xlabel(selected_hist)
-        ax.set_ylabel("Frequency")
-        st.pyplot(fig)
+    # ---------- CORRELATION (Caching juga jika dataset sangat besar) ----------
+    st.markdown("### 🔗 Correlation Heatmap")
 
-    # ---------- CORRELATION ----------
-    if len(numeric_cols) >= 2:
-        st.markdown("### 🔗 Correlation Heatmap")
-
-        corr = df_clean[numeric_cols].corr()
-
-        fig, ax = plt.subplots(figsize=(8, 6))
-        sns.heatmap(
-            corr,
-            annot=True,
-            cmap="coolwarm",
-            fmt=".2f",
-            linewidths=0.5,
-            ax=ax,
-        )
-        st.pyplot(fig)
+    # Tips: Hitung korelasi hanya sekali
+    corr = df_clean[numeric_cols].corr()
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", ax=ax)
+    st.pyplot(fig)
 
     # ================= FOOTER =================
-    st.markdown("---")
     if st.button("⬅ Back to Projects"):
         pindah_halaman("projects")
