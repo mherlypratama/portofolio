@@ -68,9 +68,11 @@ def halaman_project2():
         st.subheader("📝 Penjelasan")
         st.write(
             """
-        Visualisasi ini memisahkan data penjualan mentah menjadi empat komponen utama: **Observed**, 
-        **Trend**, **Seasonal**, dan **Residual**. Memahami apakah fluktuasi disebabkan oleh pertumbuhan 
-        organik atau sekadar pola musiman.
+        **Penjelasan** Visualisasi ini menggunakan model Multiplicative Decomposition untuk 
+        membedah data penjualan harian menjadi empat komponen utama. Penggunaan model multiplikatif 
+        sangat tepat karena menunjukkan bahwa variasi musiman berubah sebanding dengan level tren penjualan. 
+        Dengan memisahkan Trend dari Seasonal dan Residual, kita dapat memahami apakah lonjakan penjualan disebabkan
+         oleh pertumbuhan organik bisnis atau sekadar siklus mingguan yang berulang.
         """
         )
 
@@ -78,9 +80,13 @@ def halaman_project2():
         st.subheader("💡 Key Insights")
         st.markdown(
             """
-        * **Pola Tren:** Arah bisnis jangka panjang.
-        * **Kekuatan Musiman:** Konsistensi kenaikan di periode tertentu.
-        * **Deteksi Anomali:** *Residual* membantu melihat pencilan (*outliers*).
+        * **Pertumbuhan Eksponensial**: Tren penjualan menunjukkan performa luar biasa dengan pertumbuhan sebesar 113,90% dari awal hingga akhir periode, menandakan ekspansi pasar yang sangat sehat.
+
+        * **Stabilitas Penjualan**: Rata-rata dasar penjualan (baseline) berada di angka 94.370,19, memberikan angka patokan yang kuat untuk perencanaan inventaris.
+
+        * **Pola Musiman Presisi**: Rentang indeks musiman sebesar 0,0355 menunjukkan fluktuasi mingguan yang sangat konsisten dan terukur, memungkinkan prediksi jangka pendek yang lebih akurat.
+
+        * **Kualitas Model**: Nilai standar deviasi residual yang rendah (0,0934) mengindikasikan bahwa sebagian besar volatilitas data berhasil ditangkap oleh pola tren dan musiman, menyisakan sangat sedikit noise yang tidak terjelaskan.
         """
         )
 
@@ -97,29 +103,33 @@ def halaman_project2():
     for idx, img_name in enumerate(list_gambar):
         p = ASSETS_DIR / img_name
         if p.exists():
-            cols_img[idx].image(str(p), use_container_width=True, caption=img_name)
+            cols_img[idx].image(str(p), use_container_width=True)
         else:
             cols_img[idx].warning(f"{img_name} missing")
 
     col3, col4 = st.columns([1.5, 1])
     with col3:
-        st.subheader("📝 Penjelasan")
-        st.write(
-            """
-        Perbandingan agregasi: **Harian, Mingguan, dan Bulanan**. 
-        Membantu menghaluskan *noise* data harian untuk melihat pandangan strategis yang lebih luas.
-        """
-        )
+            st.subheader("📝 Penjelasan")
+            st.write(
+                """
+                Analisis ini membedah performa penjualan melalui tiga tingkat granulasi waktu: **Harian, Mingguan, dan Bulanan**. 
+                Tinjauan harian digunakan untuk melihat volatilitas dan titik ekstrem operasional, sedangkan analisis 
+                mingguan membantu mengidentifikasi hari dengan trafik tertinggi untuk optimasi staf. Terakhir, 
+                tinjauan bulanan menangkap pola musiman (*seasonality*) jangka panjang yang krusial bagi 
+                perencanaan stok inventaris dan strategi kampanye pemasaran tahunan.
+                """
+            )
 
-    with col4:
-        st.subheader("💡 Key Insights")
-        st.markdown(
-            """
-        * **Daily:** Deteksi *peak hours* operasional.
-        * **Weekly:** Evaluasi taktis promosi mingguan.
-        * **Monthly:** Fokus pada performa bisnis makro dan budget.
-        """
-        )
+        with col4:
+            st.subheader("💡 Key Insights")
+            st.markdown(
+                """
+                * **Puncak Operasional Harian:** Penjualan mencapai titik tertinggi sebesar **166.577,69** pada 4 Desember 2019. Namun, nilai standar deviasi yang tinggi (**26.068,96**) menunjukkan adanya volatilitas yang signifikan dalam aktivitas harian.
+                * **Dominasi Hari Kerja:** Berbeda dengan retail fisik pada umumnya, performa tertinggi justru terjadi pada hari **Selasa (Rata-rata: 95.967,46)**, diikuti oleh hari Minggu. Ini menandakan pola belanja pelanggan yang aktif di awal pekan.
+                * **Lonjakan Akhir Tahun:** Bulan **Desember** adalah periode paling produktif dengan rata-rata penjualan **148.654,70**, hampir tiga kali lipat dibandingkan bulan Januari. Terlihat tren kenaikan yang konsisten di kuartal keempat (Oktober–Desember).
+                * **Identifikasi Low-Season:** Bulan Januari dan September tercatat sebagai periode terendah. Hal ini memberikan peluang bagi manajemen untuk melakukan kampanye diskon khusus atau perawatan infrastruktur pada periode tersebut.
+                """
+            )
 
     st.markdown("---")
     st.caption("Developed by Herly - Time Series Project Portfolio")
