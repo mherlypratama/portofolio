@@ -57,6 +57,7 @@ def halaman_project2():
 
     img_path1 = ASSETS_DIR / "c4.png"
 
+    st.image(str(img_path1), use_container_width=True)
     # PERBAIKAN: Cek keberadaan file dan konversi ke string
     if img_path1.exists():
         st.image(str(img_path1), use_container_width=True)
@@ -131,6 +132,82 @@ def halaman_project2():
                 """
             )
 
+    st.markdown("---")
+
+    with col_naive_text:
+    st.subheader("📝 Penjelasan: Naive Forecast")
+    img_path4 = ASSETS_DIR / "m1.png"
+
+    st.image(str(img_path4), use_container_width=True)
+    st.write(
+        """
+        Model Naive Forecast menetapkan prediksi masa depan berdasarkan nilai terakhir yang diamati. 
+        Dalam data science, ini adalah 'reality check' yang sangat penting. Model ini membantu kita 
+        memahami baseline akurasi; jika model Machine Learning yang kompleks tidak mampu memberikan 
+        error yang lebih rendah dari Naive, maka kompleksitas model tersebut tidak memberikan nilai tambah.
+        """
+    )
+
+    with col_naive_insight:
+        st.subheader("💡 Key Insights")
+        st.markdown(
+            """
+            * **Akurasi Benchmark:** Nilai **MAPE sebesar 11,90%** menunjukkan bahwa secara rata-rata, prediksi sederhana ini meleset sekitar 11% dari nilai aktual.
+            * **Evaluasi Error:** Nilai **MAE (9.745,44)** memberikan gambaran bahwa rata-rata kesalahan absolut prediksi adalah sekitar 9,7 ribu unit penjualan.
+            * **Sensitivitas Outlier:** Dengan **RMSE (13.234,69)** yang lebih tinggi dari MAE, terlihat adanya fluktuasi data (varians) yang cukup besar yang mempengaruhi stabilitas prediksi baseline.
+            """
+        )
+    st.markdown("---")
+    with col_hw_text:
+    st.subheader("📝 Penjelasan: Holt-Winters")
+    img_path5 = ASSETS_DIR / "m2.png"
+
+    st.image(str(img_path5), use_container_width=True)
+    st.write(
+        """
+        Holt-Winters adalah metode *Triple Exponential Smoothing* yang dirancang untuk menangkap 
+        tiga komponen sekaligus: Level, Tren, dan Musiman. Model ini sangat populer dalam peramalan 
+        bisnis karena sifatnya yang adaptif terhadap pola berulang (seasonality) seperti yang 
+        teridentifikasi pada analisis dekomposisi sebelumnya.
+        """
+    )
+
+    with col_hw_insight:
+        st.subheader("💡 Key Insights")
+        st.markdown(
+            """
+            * **Performa Model:** Skor **MAPE (18,62%)** ternyata lebih tinggi dibandingkan model Naive. Ini mengindikasikan bahwa pola musiman pada data validasi mungkin terlalu volatil atau tidak konsisten dengan pola historis yang dipelajari model.
+            * **Magnitudo Kesalahan:** **RMSE (23.630,97)** yang cukup tinggi menunjukkan bahwa model ini mengalami kesulitan dalam menangani lonjakan data ekstrim (*peak sales*), menyebabkan simpangan yang lebar pada hasil prediksi.
+            * **Kesimpulan Teknis:** Model statistik klasik ini memerlukan tuning parameter (alpha, beta, gamma) yang lebih lanjut atau data yang lebih stasioner untuk meningkatkan akurasi.
+            """
+        )
+    st.markdown("---")
+    with col_rf_text:
+    st.subheader("📝 Penjelasan: Random Forest Regressor")
+    img_path6 = ASSETS_DIR / "m4.png"
+    img_path7 = ASSETS_DIR / "m5.png"
+
+    st.image(str(img_path6), use_container_width=True)
+    st.image(str(img_path7), use_container_width=True)
+    st.write(
+        """
+        Random Forest merupakan algoritma *Ensemble Learning* yang bekerja dengan membangun banyak 
+        pohon keputusan (*decision trees*). Dalam peramalan ini, model dilatih untuk mengenali 
+        hubungan kompleks antar fitur (seperti lag penjualan atau komponen waktu) yang mungkin 
+        terlewatkan oleh model statistik tradisional.
+        """
+    )
+
+    with col_rf_insight:
+        st.subheader("💡 Key Insights")
+        st.markdown(
+            """
+            * **Akurasi Superior (Retrain):** Setelah dilakukan *retraining*, model menghasilkan **MAPE 11,29%**. Ini adalah performa terbaik dibandingkan Naive (11,90%) dan Holt-Winters (18,62%).
+            * **Optimasi Signifikan:** Model awal menunjukkan MAPE 0,76% (teridentifikasi *overfitting* pada data latih), namun hasil **Retrain (MAPE 11,29%)** memberikan angka yang jauh lebih realistis dan andal untuk data masa depan (*generalization*).
+            * **Presisi Prediksi:** Nilai **MAE (8.176,79)** adalah yang terendah di antara semua model, membuktikan bahwa Random Forest adalah model yang paling presisi dalam meminimalkan kesalahan absolut harian.
+            * **Kesiapan Produksi:** Dengan error terendah, Random Forest dipilih sebagai model utama (*champion model*) untuk digunakan dalam sistem proyeksi penjualan perusahaan.
+            """
+        )
     st.markdown("---")
     st.caption("Developed by Herly - Time Series Project Portfolio")
 
