@@ -12,9 +12,9 @@ LIST_PROJECTS = [
         "page": "project2",
     },
     {
-        "title": "People Analytics",
-        "description": "Clustering-based segmentation for Employee.",
-        "image": "project3.png",
+        "title": "Electrical Fault Classification in Transmission Lines",
+        "description": "Otomasi Deteksi dan Klasifikasi Gangguan Listrik",
+        "image": "project3.jpg",
         "page": "project3",
     },
     {
