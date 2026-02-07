@@ -9,15 +9,6 @@ def halaman_project1():
     st.header("AI Churn Analysis")
     st.markdown("---")
 
-    # Load Data
-    try:
-        df_raw, df_clean = get_cleaned_data("./data/churn.csv")
-    except FileNotFoundError:
-        st.error(
-            "File 'churn.csv' tidak ditemukan. Pastikan file ada di folder './data/'."
-        )
-        return
-
     st.markdown(
         """
         Analisis churn ini membantu bisnis mengidentifikasi pelanggan yang berisiko berhenti berlangganan.
