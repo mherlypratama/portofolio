@@ -6,18 +6,27 @@ from router import pindah_halaman
 def halaman_project4():
     # ================= PATH SETUP =================
     BASE_DIR = Path(__file__).resolve().parent
-    ASSETS_DIR = (
-        BASE_DIR / "assets" / "project4"
-    )  # Pastikan folder ini ada jika ingin pakai gambar
+    ASSETS_DIR = BASE_DIR / "assets" / "project4"
 
-    # ================= HEADER =================
-    st.header("🌡️ Climate Prediction: Random Forest Analysis")
-    st.markdown(
+    # ================= Logo  & HEADER =================
+    col_logo, col_title = st.columns([1, 8])  # Rasio 1 untuk logo, 8 untuk judul
+
+    with col_logo:
+        img_logo = ASSETS_DIR / "logo.png"
+        if img_logo.exists():
+            st.image(str(img_logo), width=200)  # Ukuran 80px agar tidak terlalu besar
+        else:
+            st.warning("⚠️ Logo missing")
+
+    with col_title:
+        st.header("🌡️ Climate Prediction: Random Forest Analysis")
+        st.markdown(
+            """
+        **Project Overview:** Prediksi suhu maksimum harian menggunakan algoritma *Ensemble Learning* (Random Forest). 
+        Project ini berfokus pada evaluasi performa model regresi non-linear terhadap data cuaca historis.
         """
-    **Project Overview:** Prediksi suhu maksimum harian menggunakan algoritma *Ensemble Learning* (Random Forest). 
-    Project ini berfokus pada evaluasi performa model regresi non-linear terhadap data cuaca historis.
-    """
-    )
+        )
+
     st.markdown("---")
 
     # ================= 1. MODEL PERFORMANCE (KEY METRICS) =================
@@ -26,8 +35,6 @@ def halaman_project4():
         "Berdasarkan hasil testing pada dataset (20% Test Split), diperoleh performa berikut:"
     )
 
-    # Mengambil data dari output cell notebook Anda
-    # Source: Cell 18 (MAE) & Cell 19 (Accuracy)
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -109,6 +116,18 @@ def halaman_project4():
         Setiap pohon memprediksi nilai secara independen, dan hasil akhirnya adalah rata-rata dari seluruh pohon tersebut.
         """
         )
+
+    st.markdown("---")
+    # ================= Documentation =================
+    st.header("Dokumentasi Laporan")
+    list_gambar = ["doc1.png", "doc2.png"]
+    cols_img = st.columns(len(list_gambar))
+    for idx, img_name in enumerate(list_gambar):
+        p = ASSETS_DIR / img_name
+        if p.exists():
+            cols_img[idx].image(str(p), use_container_width=True, caption=img_name)
+        else:
+            cols_img[idx].warning(f"{img_name} missing")
 
     # ================= FOOTER =================
     st.markdown("---")

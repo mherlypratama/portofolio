@@ -208,7 +208,7 @@ def halaman_project3():
         """
         )
     st.markdown("---")
-    # ================= 5. RECOMMENDATIONS =================
+    # ================= Documentation =================
     st.header("Dokumentasi Laporan")
     list_gambar = ["fotbar1.png", "fotbar2.png"]
     cols_img = st.columns(len(list_gambar))
