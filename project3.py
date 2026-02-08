@@ -10,21 +10,26 @@ def halaman_project3():
     BASE_DIR = Path(__file__).resolve().parent
     ASSETS_DIR = BASE_DIR / "assets" / "projects3"
 
-    # ================= Logo PLN =================
-    img_f1 = ASSETS_DIR / "logo.png"
-    if img_f1.exists():
-        st.image(
-            str(img_f1),
-            use_container_width=True,
-            caption="F1-Score per Class Distribution",
-        )
-    else:
-        st.warning("⚠️ File 'f1.png' belum ada di folder assets.")
+    # ================= Logo PLN & HEADER =================
+    col_logo, col_title = st.columns([1, 8])  # Rasio 1 untuk logo, 8 untuk judul
 
-    # ================= HEADER =================
-    st.header("⚡ Electrical Fault Classification: Transmission Lines")
-    st.markdown("**Detecting Power System Anomalies using Machine Learning**")
+    with col_logo:
+        img_logo = ASSETS_DIR / "logo.png"
+        if img_logo.exists():
+            st.image(str(img_logo), width=80)  # Ukuran 80px agar tidak terlalu besar
+        else:
+            st.warning("⚠️ Logo missing")
+
+    with col_title:
+        st.header("⚡ Electrical Fault Classification: Transmission Lines")
+        st.markdown("**Detecting Power System Anomalies using Machine Learning**")
+
     st.markdown("---")
+
+    # # ================= HEADER =================
+    # st.header("⚡ Electrical Fault Classification: Transmission Lines")
+    # st.markdown("**Detecting Power System Anomalies using Machine Learning**")
+    # st.markdown("---")
 
     # ================= 1. BUSINESS & TECHNICAL CONTEXT =================
     col_bg1, col_bg2 = st.columns([1, 1])
@@ -205,7 +210,7 @@ def halaman_project3():
     st.markdown("---")
     # ================= 5. RECOMMENDATIONS =================
     st.header("Dokumentasi Laporan")
-    list_gambar = ["fotbar1.jpeg", "fotbar2.jpeg"]
+    list_gambar = ["fotbar1.png", "fotbar2.png"]
     cols_img = st.columns(len(list_gambar))
     for idx, img_name in enumerate(list_gambar):
         p = ASSETS_DIR / img_name
