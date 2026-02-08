@@ -110,43 +110,6 @@ def halaman_project4():
         """
         )
 
-    # ================= 3. VISUALIZATION & DISCUSSION =================
-    st.markdown("---")
-    st.subheader("3. Model Visualization (Decision Tree)")
-
-    col_vis1, col_vis2 = st.columns([1, 2])
-
-    with col_vis1:
-        # Menampilkan gambar pohon jika ada di folder assets
-        # (Anda bisa mengambil gambar tree.png dari notebook dan menyimpannya di folder assets)
-        img_tree = ASSETS_DIR / "small_tree.png"
-        if img_tree.exists():
-            st.image(
-                str(img_tree), caption="Single Decision Tree Structure", width="stretch"
-            )
-        else:
-            # Placeholder visual jika gambar tidak ada
-            st.warning(
-                "Visualisasi struktur pohon (tree.png) dapat ditambahkan di folder assets."
-            )
-
-    with col_vis2:
-        st.markdown("#### Analisis Kedalaman Pohon")
-        st.write(
-            """
-        Dalam notebook, kita mengekstraksi satu pohon (*estimator #5*) untuk divisualisasikan. 
-        Struktur pohon menunjukkan bagaimana model memecah keputusan berdasarkan fitur cuaca.
-        """
-        )
-
-        st.success(
-            """
-        **Insight:**
-        Meskipun satu pohon mungkin memiliki bias (error tinggi), menggabungkan 1000 pohon dalam Random Forest 
-        secara drastis mengurangi varians error tersebut, menghasilkan akurasi 94% yang stabil.
-        """
-        )
-
     # ================= FOOTER =================
     st.markdown("---")
     if st.button("⬅ Kembali ke Daftar Project", key="back_climate_static"):
