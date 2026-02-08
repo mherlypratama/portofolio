@@ -16,7 +16,7 @@ def halaman_project3():
     with col_logo:
         img_logo = ASSETS_DIR / "logo.png"
         if img_logo.exists():
-            st.image(str(img_logo), width=80)  # Ukuran 80px agar tidak terlalu besar
+            st.image(str(img_logo), width=200)  # Ukuran 80px agar tidak terlalu besar
         else:
             st.warning("⚠️ Logo missing")
 

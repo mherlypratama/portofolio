@@ -18,9 +18,9 @@ LIST_PROJECTS = [
         "page": "project3",
     },
     {
-        "title": "Micro Climate",
-        "description": "Deskripsi project keempat kamu.",
-        "image": "project4.png",
+        "title": "Climate Prediction",
+        "description": "Predicting actual temperatures using Random Forest Regressor with 94% accuracy.",
+        "image": "climate_thumb.jpg",
         "page": "project4",
     },
 ]
