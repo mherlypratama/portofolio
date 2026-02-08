@@ -19,7 +19,7 @@ LIST_PROJECTS = [
     },
     {
         "title": "Climate Prediction",
-        "description": "Predicting actual temperatures using Random Forest Regressor with 94% accuracy.",
+        "description": "Predicting actual temperatures using Random Forest Regressor **PT Drone Nirwana Bentala** .",
         "image": "climate_thumb.jpg",
         "page": "project4",
     },
