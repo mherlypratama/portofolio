@@ -13,12 +13,12 @@ LIST_PROJECTS = [
     },
     {
         "title": "Electrical Fault Classification in Transmission Lines",
-        "description": "Otomasi Deteksi dan Klasifikasi Gangguan Listrik",
+        "description": "Otomasi Deteksi dan Klasifikasi Gangguan Listrik at **PT PLN Electricity Services**",
         "image": "project3.jpg",
         "page": "project3",
     },
     {
-        "title": "Project Baru 4",
+        "title": "Micro Climate",
         "description": "Deskripsi project keempat kamu.",
         "image": "project4.png",
         "page": "project4",
