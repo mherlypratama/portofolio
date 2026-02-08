@@ -8,7 +8,18 @@ from pathlib import Path
 def halaman_project3():
     # ================= PATH SETUP =================
     BASE_DIR = Path(__file__).resolve().parent
-    ASSETS_DIR = BASE_DIR / "assets"
+    ASSETS_DIR = BASE_DIR / "assets" / "projects3"
+
+    # ================= Logo PLN =================
+    img_f1 = ASSETS_DIR / "logo.png"
+    if img_f1.exists():
+        st.image(
+            str(img_f1),
+            use_container_width=True,
+            caption="F1-Score per Class Distribution",
+        )
+    else:
+        st.warning("⚠️ File 'f1.png' belum ada di folder assets.")
 
     # ================= HEADER =================
     st.header("⚡ Electrical Fault Classification: Transmission Lines")
@@ -191,6 +202,17 @@ def halaman_project3():
         3.  **Cost-Benefit Analysis:** Lakukan audit penghematan biaya maintenance tahunan setelah implementasi sistem ini untuk justifikasi investasi infrastruktur sensor.
         """
         )
+    st.markdown("---")
+    # ================= 5. RECOMMENDATIONS =================
+    st.header("Dokumentasi Laporan")
+    list_gambar = ["fotbar1.jpeg", "fotbar2.jpeg"]
+    cols_img = st.columns(len(list_gambar))
+    for idx, img_name in enumerate(list_gambar):
+        p = ASSETS_DIR / img_name
+        if p.exists():
+            cols_img[idx].image(str(p), use_container_width=True, caption=img_name)
+        else:
+            cols_img[idx].warning(f"{img_name} missing")
 
     # ================= FOOTER =================
     st.markdown("---")
